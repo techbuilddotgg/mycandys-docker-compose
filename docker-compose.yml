@@ -1,19 +1,19 @@
 version: "3.7"
 
 services:
-  mycadys_ui:
+  mycandys_ui:
     image: ""
-  mycadys_orders_api:
+  mycandys_orders_api:
     image: ""
-  mycadys_products_api:
+  mycandys_products_api:
     image: ""
-  mycadys_cart_api:
+  mycandys_cart_api:
     image: ""
-  mycadys_notification_api:
+  mycandys_notification_api:
     image: ""
-  mycadys_discounts_api:
+  mycandys_discounts_api:
     image: ""
-  mycadys_auth_api:
+  mycandys_auth_api:
     image: ""
-  mycadys_api_gateway:
+  mycandys_api_gateway:
     image: ""
