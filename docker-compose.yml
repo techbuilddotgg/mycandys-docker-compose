@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  mycadys_ui:
+    image: ""
+  mycadys_orders_api:
+    image: ""
+  mycadys_products_api:
+    image: ""
+  mycadys_cart_api:
+    image: ""
+  mycadys_notification_api:
+    image: ""
+  mycadys_discounts_api:
+    image: ""
+  mycadys_auth_api:
+    image: ""
+  mycadys_api_gateway:
+    image: ""
