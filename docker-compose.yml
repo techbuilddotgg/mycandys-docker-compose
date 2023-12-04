@@ -6,16 +6,24 @@ services:
     container_name: mycandys_products_service
     ports:
       - 11082:11082
-    env_file:
-      - mycandys-products-service.env
+    environment:
+      - PORT=${PRODUCT_SERVICE_PORT}
+      - MONGODB_URI=${PRODUCT_SERVICE_MONGODB_URI}
+      - AUTH_SERVICE_URL=${PRODUCT_SERVICE_AUTH_SERVICE_URL}
     networks:
       - mycandys-network
 
   mycandys_auth_service:
     image: mycandies/mycandys-auth-service:v1.0.0
     container_name: mycandys_auth_service
-    env_file:
-      - mycandys-auth-service.env
+    environment:
+      - APP_NAME=${AUTH_SERVICE_APP_NAME}
+      - DATABASE_NAME=${AUTH_SERVICE_DATABASE_NAME}
+      - DATABASE_URI=${AUTH_SERVICE_DATABASE_URI}
+      - JWT_EXP=${AUTH_SERVICE_JWT_EXP}
+      - JWT_REFRESH_EXP=${AUTH_SERVICE_JWT_REFRESH_EXP}
+      - JWT_SECRET=${AUTH_SERVICE_JWT_SECRET}
+      - PORT=${AUTH_SERVICE_PORT}
     networks:
       - mycandys-network
 
