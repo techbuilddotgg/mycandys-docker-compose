@@ -1,19 +1,24 @@
-version: "3.7"
+version: '3.7'
 
 services:
-  mycandys_ui:
-    image: ""
-  mycandys_orders_api:
-    image: ""
-  mycandys_products_api:
-    image: ""
-  mycandys_cart_api:
-    image: ""
-  mycandys_notification_api:
-    image: ""
-  mycandys_discounts_api:
-    image: ""
-  mycandys_auth_api:
-    image: ""
-  mycandys_api_gateway:
-    image: ""
+  mycandys_products_service:
+    image: mycandies/mycandys-products-service:v1.0.2
+    container_name: mycandys_products_service
+    ports:
+      - 11082:11082
+    env_file:
+      - mycandys-products-service.env
+    networks:
+      - mycandys-network
+
+  mycandys_auth_service:
+    image: mycandies/mycandys-auth-service:v1.0.0
+    container_name: mycandys_auth_service
+    env_file:
+      - mycandys-auth-service.env
+    networks:
+      - mycandys-network
+
+networks:
+  mycandys-network:
+    driver: bridge
