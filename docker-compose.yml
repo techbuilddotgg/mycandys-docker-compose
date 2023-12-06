@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mycandys_products_service:
     image: mycandies/mycandys-products-service:v1.0.2
-    container_name: mycandys_products_service
+    container_name: mycandys-products-service
     ports:
       - 11082:11082
     environment:
@@ -15,7 +15,9 @@ services:
 
   mycandys_auth_service:
     image: mycandies/mycandys-auth-service:v1.0.0
-    container_name: mycandys_auth_service
+    container_name: mycandys-auth-service
+    ports:
+      - 11089:11089
     environment:
       - APP_NAME=${AUTH_SERVICE_APP_NAME}
       - DATABASE_NAME=${AUTH_SERVICE_DATABASE_NAME}
@@ -24,6 +26,19 @@ services:
       - JWT_REFRESH_EXP=${AUTH_SERVICE_JWT_REFRESH_EXP}
       - JWT_SECRET=${AUTH_SERVICE_JWT_SECRET}
       - PORT=${AUTH_SERVICE_PORT}
+      - SPRING_PROFILE=${AUTH_SERVICE_SPRING_PROFILE}
+      - SWAGGER_SERVER_URL=${AUTH_SERVICE_SWAGGER_SERVER_URL}
+    networks:
+      - mycandys-network
+
+  mycandys_gateway_service:
+    image: mycandies/mycandys-gateway-service:v1.0.0
+    container_name: mycandys-gateway-service
+    ports:
+      - 11088:11088
+    environment:
+      - PORT=${GATEWAY_SERVICE_PORT}
+      - AUTH_SERVICE_URI=${GATEWAY_SERVICE_AUTH_SERVICE_URI}
     networks:
       - mycandys-network
 
