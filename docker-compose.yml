@@ -10,6 +10,19 @@ services:
       - PORT=${PRODUCT_SERVICE_PORT}
       - MONGODB_URI=${PRODUCT_SERVICE_MONGODB_URI}
       - AUTH_SERVICE_URL=${PRODUCT_SERVICE_AUTH_SERVICE_URL}
+      - SWAGGER_PORT=${PRODUCT_SERVICE_SWAGGER_PORT}
+    networks:
+      - mycandys-network
+
+  mycandys_cart_service:
+    image: mycandies/mycandys-cart-service:v1.0.2
+    container_name: mycandys-cart-service
+    environment:
+      - PORT=${CART_SERVICE_PORT}
+      - MONGODB_URI=${CART_SERVICE_MONGODB_URI}
+      - AUTH_SERVICE_URL=${CART_SERVICE_AUTH_SERVICE_URL}
+      - PRODUCT_SERVICE_URL=${CART_SERVICE_PRODUCTS_SERVICE_URL}
+      - SWAGGER_PORT=${CART_SERVICE_SWAGGER_PORT}
     networks:
       - mycandys-network
 
