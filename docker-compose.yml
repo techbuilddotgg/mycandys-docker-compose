@@ -81,6 +81,22 @@ services:
     networks:
       - mycandys-network
 
+  mycandys_notifications_service:
+    image: mycandies/mycandys_notifications_service:v1.0.0
+    container_name: mycandys_notifications_service
+    environment:
+      - PORT=${NOTIFICATIONS_SERVICE_PORT}
+    networks:
+      - mycandys-network
+
+  mycandys_discounts_service:
+    image: mycandies/mycandys_discounts_service:v1.0.0
+    container_name: mycandys_discounts_service
+    environment:
+      - PORT=${DISCOUNTS_SERVICE_PORT}
+    networks:
+      - mycandys-network
+
 networks:
   mycandys-network:
     driver: bridge
