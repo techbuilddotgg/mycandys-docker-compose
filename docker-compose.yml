@@ -1,6 +1,32 @@
 version: '3.7'
 
 services:
+  mycandys_ui:
+    image: mycandies/mycandys-ui:latest
+    container_name: mycandys-ui
+    ports:
+      - "11080:11080"
+    environment:
+      - PORT=${UI_PORT}
+      - NEXT_PUBLIC_BACKEND_URL=${UI_NEXT_PUBLIC_BACKEND_URL}
+      - NODE_ENV=${UI_NODE_ENV}
+    networks:
+      - mycandys-network
+  mycandys_order_service:
+    image: mycandies/mycandys-order-service:latest
+    container_name: mycandys-order-service
+    ports:
+      - "11081:11081"
+    environment:
+      - PORT=${ORDER_SERVICE_PORT}
+      - DATABASE_URL=${ORDER_SERVICE_MONGODB_URI}
+      - DATABASE_NAME=${ORDER_SERVICE_DATABASE_NAME}
+      - AUTH_SERVICE_URL=${ORDER_SERVICE_AUTH_SERVICE_URL}
+      - PRODUCT_SERVICE_URL=${ORDER_SERVICE_PRODUCTS_SERVICE_URL}
+      - CART_SERVICE_URL=${ORDER_SERVICE_CARTS_SERVICE_URL}
+      - SWAGGER_PORT=${ORDER_SERVICE_SWAGGER_PORT}
+    networks:
+      - mycandys-network
   mycandys_products_service:
     image: mycandies/mycandys-products-service:v1.0.2
     container_name: mycandys-products-service
